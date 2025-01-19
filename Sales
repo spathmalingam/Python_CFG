@@ -1,0 +1,51 @@
+import pandas as pd
+read_data = pd.read_csv('sales.csv')
+print(read_data) #1. Read the data from the spreadsheet
+
+monthly_sales=read_data.sales
+sales=[]
+for numbers in monthly_sales:
+    sales.append(numbers)
+print(f"List of sales from each month is: {sales}") #2. Collect all of the sales from each month into a single list
+
+total_cost=0
+for figures in sales:
+    total_cost=total_cost+figures
+print(f"Total sales across all the months is: {total_cost}") #3. Output the total sales across all months
+
+average_sales=total_cost/len(sales) #The average of Sales
+
+print(f"The average of the sales is : {average_sales}")
+
+
+max_sales= read_data['sales'].max() #Maximum sales
+print(max_sales)
+min_sales= read_data['sales'].min() #Minimum sales
+print(min_sales)
+
+result1 = read_data.loc[(read_data['sales'] == max_sales)]
+print(f"Highest sales is in the month {result1.month}")
+result2 = read_data.loc[(read_data['sales'] == min_sales)]
+print(f"Lowest sales is in the month {result2.month}")
+
+
+# total_cost=0
+# for figures in sales:
+#     total_cost=total_cost+figures
+# print(f"Total sales across all the months is: {total_cost}") #3. Output the total sales across all months
+#
+# average_sales=total_cost/len(sales) #The average of Sales
+#
+# print(f"The average of the sales is : {average_sales}")
+#
+#
+# max_sales= read_data['sales'].max() #Maximum sales
+# print(max_sales)
+# min_sales= read_data['sales'].min() #Minimum sales
+# print(min_sales)
+#
+# result1 = read_data.loc[(read_data['sales'] == max_sales)]
+# print(f"Highest sales is in the month {result1.month}")
+# result2 = read_data.loc[(read_data['sales'] == min_sales)]
+# print(f"Lowest sales is in the month {result2.month}")
+#
