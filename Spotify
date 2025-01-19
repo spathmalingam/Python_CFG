@@ -1,0 +1,82 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+read_data = pd.read_csv('spotify_artist.csv')
+print(read_data)
+
+
+number_artists = read_data.names
+name = []
+for names in number_artists:
+    name.append(names)
+print(f"List of artists {name}") #2. Collect all of the sales from each month into a single list
+
+print(len(name))
+
+
+max_monthly_listener= read_data['monthly_listeners'].max() #Maximum listeners
+print(max_monthly_listener)
+
+min_monthly_listener= read_data['monthly_listeners'].min() #Maximum listeners
+print(min_monthly_listener)
+
+min_popularity= read_data['popularity'].min() #Minimum popularity ranking
+print(min_popularity)
+
+max_popularity= read_data['popularity'].max() #Maximum popularity ranking
+print(max_popularity)
+
+result1 = read_data.loc[(read_data['popularity'] == min_popularity)]
+# result2 = read_data.loc[(read_data['popularity'] == min_popularity)]
+# result3 = read_data.loc[(read_data['names'] == min_popularity)]
+
+print(result1.names.tolist(), result1.popularity.tolist())
+minnam = result1.names.tolist()
+minpop = result1.popularity.tolist()
+
+# print(f"Artist with the lowest popularity {result1.popularity}")
+
+kpop_data = read_data[read_data['playlists_found'].str.contains("K-Pop", na=False, case=False)]
+
+# Find the most popular artist in the K-Pop playlists
+most_popular_kpop_artist = kpop_data.loc[kpop_data['popularity'].idxmax()]
+
+print(f"Most popular K-Pop artist: {most_popular_kpop_artist['names']}")
+print(f"Popularity score: {most_popular_kpop_artist['popularity']}")
+
+
+
+# Correlation between Popularity and Followers
+plt.figure(figsize=(10, 5))
+plt.scatter(read_data['popularity'], read_data['followers'])
+plt.xlabel('Popularity')
+plt.ylabel('Followers')
+plt.title('Correlation between Popularity and Followers')
+plt.show()
+
+
+
+
+
+
+# top_10_artists = read_data.sort_values(by='popularity', ascending=False).head(10)
+
+# # Plot the data
+# plt.figure(figsize=(12, 8))
+# plt.barh(top_10_artists['names'], top_10_artists['popularity'], color='skyblue')
+# plt.xlabel('Popularity')
+# plt.ylabel('Artists')
+# plt.title('Top 10 Artists by Popularity')
+# plt.gca().invert_yaxis()  # Invert y-axis to show the most popular artist at the top
+# plt.show()
+
+# result2 = read_data.loc[(read_data)]
+# plt.figure(figsize=(8, 6))
+# plt.scatter(first_release, followers, color='blue', alpha=0.7)
+# plt.title('Correlation between First Release and Followers')
+# plt.xlabel('First Release')
+# plt.ylabel('Followers')
+# plt.grid(True)
+# plt.show()
+
+
+
